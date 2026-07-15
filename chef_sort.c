@@ -2,8 +2,8 @@
 #include <string.h>
 
 // ANÁLISE DE ALGORITMO - Desafio Chef Sort
-// Este é o arquivo inicial para o desafio. 
-// Dependendo do nível escolhido (Novato, Aventureiro ou Mestre), 
+// Este é o arquivo inicial para o desafio.
+// Dependendo do nível escolhido (Novato, Aventureiro ou Mestre),
 // descomente e utilize as estruturas e funções correspondentes.
 
 // ====================================================================
@@ -11,12 +11,10 @@
 // ====================================================================
 
 // Struct para o Nível Aventureiro
-/*
 typedef struct {
     char nome[50];
     int qtd_ingredientes;
 } Prato;
-*/
 
 // Struct para o Nível Mestre
 /*
@@ -50,7 +48,6 @@ void bubbleSortStrings(char arr[][50], int n, int *comparacoes, int *trocas) {
 				trocou = 1;
 				(*trocas)++;
 			}
-
 		}
 		if (!trocou)
 			break;
@@ -58,11 +55,21 @@ void bubbleSortStrings(char arr[][50], int n, int *comparacoes, int *trocas) {
 }
 
 // Nível Aventureiro: Selection Sort para array de structs (Prato)
-/*
 void selectionSortPratos(Prato arr[], int n) {
-    // Sua lógica do Selection Sort aqui buscando a menor qtd_ingredientes
+    for (int i=0; i<n; i++) {
+        int indice_menor = i;
+        for (int j=i+1; j<n; j++){
+            if (arr[j].qtd_ingredientes < arr[indice_menor].qtd_ingredientes) {
+                indice_menor=j;
+            }
+        }
+        if (indice_menor != i) {
+            Prato temp = arr[i];
+            arr[i] = arr[indice_menor];
+            arr[indice_menor] = temp;
+        }
+    }
 }
-*/
 
 // Nível Mestre: Recursive Insertion Sort para array de structs (Comanda)
 // Dica: Lembre-se de definir o "caso base" (n <= 1) para parar a recursão!
@@ -113,20 +120,35 @@ int main() {
     // ---------------------------------------------------------
     // ÁREA DO NÍVEL AVENTUREIRO (Pratos / Selection Sort)
     // ---------------------------------------------------------
-    /*
     // Inicialize aqui o seu vetor de Pratos
-    
-    printf("\n--- Nivel Aventureiro: Organizando os Pratos ---\n");
-    // Imprima antes, chame a funcao selectionSortPratos, imprima depois
-    */
+    Prato lista_pratos[5] = {
+        {"Macarronada", 5},
+        {"Omelete", 2},
+        {"Feijoada Completa", 12},
+        {"Salada", 4},
+        {"Lasanha", 8}
+    };
 
+    printf("\n\n\n--- Nivel Aventureiro: Organizando os Pratos ---\n");
+    // Imprima antes, chame a funcao selectionSortPratos, imprima depois
+    printf("LISTA ANTES DA ORDENACAO\n");
+    for (int i=0; i<5; i++) {
+        printf("%s - %d ingredientes\n", lista_pratos[i].nome, lista_pratos[i].qtd_ingredientes);
+    }
+
+    selectionSortPratos(lista_pratos, 5);
+
+    printf("\nLISTA APOS DA ORDENACAO\n");
+    for (int i=0; i<5; i++) {
+        printf("%s - %d ingredientes\n", lista_pratos[i].nome, lista_pratos[i].qtd_ingredientes);
+    }
 
     // ---------------------------------------------------------
     // ÁREA DO NÍVEL MESTRE (Comandas / Recursive Insertion Sort)
     // ---------------------------------------------------------
     /*
     // Inicialize aqui o seu vetor de Comandas
-    
+
     printf("\n--- Nivel Mestre: Organizando as Comandas ---\n");
     // Imprima antes, chame a funcao recursiveInsertionSort, imprima depois
     */
